@@ -3,62 +3,159 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Castle Go — tower defense</title>
-<link rel="icon" href="img/icon.webp">
+<title>Castle Go — Defend your castle across 500 levels of tower defense.</title>
+<meta name="description" content="Build weapons on the field, upgrade them mid-battle and hold the line against waves of creatures and bosses. Every level is a fresh start; what you collect makes you stronger.">
+<meta property="og:title" content="Castle Go — Defend your castle across 500 levels of tower defense.">
+<meta property="og:description" content="Build weapons on the field, upgrade them mid-battle and hold the line against waves of creatures and bosses. Every level is a fresh start; what you collect makes you stronger.">
+<meta property="og:image" content="https://dodimisoft.github.io/castlego/img/logo.webp">
+<meta name="theme-color" content="#0a1017">
+<link rel="icon" href="../castlego/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a1017;--surface:#152131;--border:#233448;--accent:#4fd1e0;--text:#f4f9fc;--dim:#afc8de}
+:root{--bg:#0a1017;--bg2:#0f1a26;--surface:#152131;--surfaceHi:#1c2c40;--border:#233448;--borderHi:#31597a;--accent:#4fd1e0;--gold:#f5c451;--text:#f4f9fc;--dim:#afc8de}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-a{color:var(--accent)}
-.wrap{max-width:760px;margin:0 auto;padding:24px 16px 64px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
-header img{width:44px;height:44px;border-radius:10px}
-header .t{font-weight:700;font-size:20px}
-header nav{margin-left:auto;font-size:14px}
-h1{font-size:28px;line-height:1.25;margin:8px 0 16px}
-h2{font-size:18px;margin:28px 0 8px;color:var(--accent)}
-p{margin:0 0 12px;color:var(--dim)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin:16px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin:20px 0}
-.grid img{width:100%;aspect-ratio:1;object-fit:contain;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px}
-.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.stats div{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px}
-.stats b{display:block;font-size:22px;color:var(--text)}
-.stats span{font-size:13px;color:var(--dim)}
-.links a{display:inline-block;margin:0 14px 8px 0}
-footer{margin-top:40px;font-size:13px;color:var(--dim)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 Fredoka,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 520px at 50% -120px,rgba(79,209,224,.22),transparent 70%),radial-gradient(700px 500px at 100% 40%,rgba(49,89,122,.25),transparent 70%),linear-gradient(var(--bg),var(--bg2))}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.display{font-family:"Luckiest Guy",Fredoka,sans-serif;font-weight:400;letter-spacing:.04em;text-transform:uppercase}
+/* üst çubuk */
+.top{position:sticky;top:0;z-index:10;background:rgba(10,16,23,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text)}
+.brand:hover{text-decoration:none}
+.brand img{width:40px;height:40px;object-fit:contain}
+.brand span{font-size:22px;padding-top:4px}
+.menu{display:flex;gap:18px;margin-left:auto;font-weight:500}
+.menu a{color:var(--dim)}
+.menu a.on,.menu a:hover{color:var(--text);text-decoration:none}
+.lang{display:flex;border:1px solid var(--borderHi);border-radius:999px;overflow:hidden;margin-left:8px}
+.lang a{padding:6px 12px;font-weight:600;font-size:14px;color:var(--dim)}
+.lang a.on{background:var(--accent);color:#06232a}
+.lang a:hover{text-decoration:none}
+@media (max-width:640px){.menu{display:none}.lang{margin-left:auto}.brand span{font-size:19px}}
+/* kahraman */
+.hero{text-align:center;padding:56px 0 32px}
+.hero .logo{width:min(300px,70vw);height:auto;filter:drop-shadow(0 18px 40px rgba(79,209,224,.28))}
+.wordmark{display:block;width:min(520px,88vw);height:auto;margin:6px auto 0}
+.tagline{font-size:22px;font-weight:600;margin:14px 0 6px}
+.lead{max-width:640px;margin:0 auto;color:var(--dim)}
+.badges{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:26px 0 8px}
+.badge{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:14px;background:var(--surface);border:1px solid var(--borderHi);text-align:left}
+.badge small{display:block;font-size:12px;color:var(--dim);line-height:1.2}
+.badge b{font-size:17px;line-height:1.2}
+.note{font-size:14px;color:var(--dim)}
+/* sayılar */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:36px 0 8px}
+.stats div{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 8px;text-align:center}
+.stats b{display:block;font-family:"Luckiest Guy";font-weight:400;font-size:30px;color:var(--accent);line-height:1.1}
+.stats span{font-size:14px;color:var(--dim)}
+@media (max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
+section{padding:40px 0}
+h2.sec{font-size:30px;margin:0 0 6px;text-align:center}
+.sub{text-align:center;color:var(--dim);margin:0 0 26px}
+/* özellikler */
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feature{background:linear-gradient(180deg,var(--surfaceHi),var(--surface));border:1px solid var(--border);border-radius:18px;padding:20px;text-align:center}
+.feature img{width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.45))}
+.feature h3{font-size:18px;margin:10px 0 6px}
+.feature p{margin:0;color:var(--dim);font-size:15px}
+@media (max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.features{grid-template-columns:1fr}}
+/* koleksiyon menüsü */
+.cats{display:flex;flex-direction:column;gap:12px}
+details.cat{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+details.cat[open]{border-color:var(--borderHi)}
+details.cat summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px}
+details.cat summary::-webkit-details-marker{display:none}
+details.cat summary:hover{background:var(--surfaceHi)}
+.cat .ico{width:52px;height:52px;object-fit:contain;flex:none}
+.cat .name{font-size:20px;font-weight:600}
+.cat .count{font-size:13px;font-weight:600;color:var(--accent);border:1px solid var(--borderHi);border-radius:999px;padding:2px 10px;margin-left:6px}
+.cat .peek{display:flex;margin-left:auto}
+.cat .peek img{width:34px;height:34px;object-fit:contain;margin-left:-6px;background:var(--bg);border:1px solid var(--border);border-radius:50%;padding:3px}
+.cat .chev{width:26px;height:26px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--accent);font-weight:700;transition:transform .2s}
+details.cat[open] .chev{transform:rotate(90deg)}
+@media (max-width:560px){.cat .peek{display:none}.cat .chev{margin-left:auto}}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px;padding:6px 18px 18px}
+.item{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:10px 8px 8px;text-align:center}
+.item img{width:84px;height:84px;object-fit:contain}
+.item span{display:block;font-size:14px;line-height:1.25;margin-top:6px}
+.item.premium{border-color:rgba(245,196,81,.45)}
+.item em{position:absolute;top:6px;right:6px;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#2b1d00;background:var(--gold);border-radius:6px;padding:1px 5px}
+/* hukuk */
+.doc{max-width:760px;margin:40px auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px clamp(18px,4vw,40px)}
+.doc h1{font-size:34px;margin:0 0 4px}
+.doc .date{display:inline-block;font-size:13px;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:2px 12px;margin-bottom:18px}
+.doc h2{font-size:17px;letter-spacing:.02em;margin:28px 0 8px;color:var(--accent)}
+.doc p{color:var(--dim);margin:0 0 12px;overflow-wrap:anywhere}
+.doc b{color:var(--text)}
+/* alt bilgi */
+footer{border-top:1px solid var(--border);margin-top:48px;padding:28px 0 40px;color:var(--dim);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+footer .links{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer .links a{color:var(--dim)}
+footer .copy{margin-left:auto}
+.studio{display:flex;gap:18px;align-items:center;max-width:560px;margin:24px auto;padding:18px;background:var(--surface);border:1px solid var(--borderHi);border-radius:20px;color:var(--text)}
+.studio:hover{text-decoration:none;background:var(--surfaceHi)}
+.studio img{width:92px;height:92px;object-fit:contain}
+.studio b{font-size:22px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header><img src="img/icon.webp" alt=""><a class="t" href="./" style="color:inherit;text-decoration:none">Castle Go</a></header>
+<header class="top"><div class="wrap">
+<a class="brand" href="../castlego/index.html"><img src="../castlego/img/logo.webp" alt=""><span class="display">Castle Go</span></a>
+<nav class="menu">
+<a href="../castlego/index.html" class="on">Game</a>
+<a href="../castlego/privacy.html">Privacy</a>
+<a href="../castlego/terms.html">Terms</a>
+</nav>
+<div class="lang"><a data-l="tr" href="../castlego/tr.html">TR</a><a data-l="en" href="#" class="on">EN</a></div>
+</div></header>
 
-<h1>Castle Go</h1>
-<p>Defend your castle across 500 levels. Build weapons on the field, upgrade them during battle, and survive waves of creatures and bosses.</p>
-<p lang="tr">500 bölüm boyunca kaleni savun. Sahaya silah kur, savaşta yükselt, canavar ve boss dalgalarına dayan.</p>
-<div class="grid"><img src="img/castle.webp" alt="" loading="lazy"><img src="img/castle2.webp" alt="" loading="lazy"><img src="img/catapult.webp" alt="" loading="lazy"><img src="img/tesla.webp" alt="" loading="lazy"><img src="img/plasma.webp" alt="" loading="lazy"><img src="img/iceSpike.webp" alt="" loading="lazy"><img src="img/lifedrainer.webp" alt="" loading="lazy"><img src="img/frostTroll.webp" alt="" loading="lazy"><img src="img/meteor.webp" alt="" loading="lazy"><img src="img/blackHole.webp" alt="" loading="lazy"><img src="img/platform.webp" alt="" loading="lazy"><img src="img/colossus.webp" alt="" loading="lazy"></div>
-<div class="stats">
-<div><b>500</b><span>levels · bölüm</span></div>
-<div><b>18</b><span>weapons · silah</span></div>
-<div><b>22</b><span>creatures · canavar</span></div>
-<div><b>6</b><span>bosses · boss</span></div>
-<div><b>12</b><span>castles · kale</span></div>
-<div><b>14</b><span>platforms · kaide</span></div>
-<div><b>14</b><span>artifacts</span></div>
-<div><b>11</b><span>ultimates · özel güç</span></div>
-<div><b>25</b><span>medals · madalya</span></div>
+<main class="wrap">
+<div class="hero">
+<img class="logo" src="img/logo.webp" alt="Castle Go">
+<svg class="wordmark" viewBox="0 0 560 96" role="img" aria-label="Castle Go">
+<defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f9fc"/><stop offset="1" stop-color="#a5e9f4"/></linearGradient></defs>
+<text x="280" y="78" text-anchor="middle" font-family="Luckiest Guy" font-size="80" letter-spacing="4" fill="#06141c" opacity=".55" transform="translate(0 5)">CASTLE GO</text>
+<text x="280" y="78" text-anchor="middle" font-family="Luckiest Guy" font-size="80" letter-spacing="4" fill="url(#wg)" stroke="#23648b" stroke-width="10" paint-order="stroke" stroke-linejoin="round">CASTLE GO</text>
+</svg>
+<p class="tagline">Defend your castle across 500 levels of tower defense.</p>
+<p class="lead">Build weapons on the field, upgrade them mid-battle and hold the line against waves of creatures and bosses. Every level is a fresh start; what you collect makes you stronger.</p>
+<div class="badges"><div class="badge"><svg width="24" height="26" viewBox="0 0 24 26" aria-hidden="true"><path d="M2 1.5v23L14.5 13z" fill="#4fd1e0"/><path d="M2 1.5l15.6 8.9-3.1 2.6z" fill="#a5e9f4"/><path d="M2 24.5l15.6-8.9-3.1-2.6z" fill="#31a3b3"/><path d="M17.6 10.4l4.2 2.4c.6.3.6.9 0 1.2l-4.2 2.4-3.1-3.4z" fill="#f5c451"/></svg><div><small>Coming soon</small><b>Google Play</b></div></div><div class="badge"><svg width="22" height="26" viewBox="0 0 22 26" aria-hidden="true"><path fill="#f4f9fc" d="M18.2 13.8c0-3.3 2.7-4.9 2.8-5-1.5-2.2-3.9-2.5-4.7-2.6-2-.2-3.9 1.2-4.9 1.2-1 0-2.6-1.2-4.3-1.1-2.2 0-4.2 1.3-5.3 3.2-2.3 4-.6 9.8 1.6 13 1.1 1.6 2.4 3.3 4.1 3.3 1.6-.1 2.3-1.1 4.3-1.1 2 0 2.5 1.1 4.3 1 1.8 0 2.9-1.6 4-3.2 1.2-1.8 1.8-3.6 1.8-3.7-.1 0-3.7-1.4-3.7-5.8zM15 4.1c.9-1.1 1.5-2.6 1.3-4.1-1.3.1-2.9.9-3.8 2-.8.9-1.6 2.5-1.4 4 1.5.1 2.9-.8 3.9-1.9z"/></svg><div><small>Coming soon</small><b>App Store</b></div></div></div>
+<p class="note">Requires an internet connection.</p>
+<div class="stats"><div><b>500</b><span>Levels</span></div><div><b>18</b><span>Weapons</span></div><div><b>22</b><span>Creatures</span></div><div><b>6</b><span>Bosses</span></div><div><b>11</b><span>Ultimates</span></div><div><b>25</b><span>Medal sets</span></div></div>
 </div>
-<div class="card">
-<p><b>Coming soon</b> to Google Play and the App Store. · <span lang="tr">Yakında Google Play ve App Store'da.</span></p>
-<p>An internet connection is required. · <span lang="tr">İnternet bağlantısı gerektirir.</span></p>
+<section>
+<h2 class="sec display" style="margin-bottom:24px">How you play</h2>
+<div class="features"><div class="feature"><img src="img/weapons-catapult.webp" alt="" loading="lazy"><h3>Build and upgrade</h3><p>Place weapons on the field and upgrade them during battle. 18 weapons, each with its own role.</p></div><div class="feature"><img src="img/creatures-colossus.webp" alt="" loading="lazy"><h3>Creatures and bosses</h3><p>22 creature types with their own abilities and 6 bosses guarding the regions.</p></div><div class="feature"><img src="img/ultimates-meteor.webp" alt="" loading="lazy"><h3>Ultimates</h3><p>Turn the tide with 11 ultimates that charge up as you fight.</p></div><div class="feature"><img src="img/castles-dragonRoost.webp" alt="" loading="lazy"><h3>Collect and grow</h3><p>12 castles, 14 platforms and 14 artifacts that power up your defense.</p></div></div>
+</section>
+<section>
+<h2 class="sec display">The world of Castle Go</h2>
+<p class="sub">Open a category to see everything you can unlock.</p>
+<div class="cats">
+<details class="cat"><summary><img class="ico" src="img/weapons-plague.webp" alt=""><span class="name">Weapons</span><span class="count">18</span><span class="peek"><img src="img/weapons-bomber.webp" alt="" loading="lazy"><img src="img/weapons-hammer.webp" alt="" loading="lazy"><img src="img/weapons-fireball.webp" alt="" loading="lazy"><img src="img/weapons-lightningRod.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/weapons-gun.webp" alt="" loading="lazy"><span>Marksman</span></div><div class="item"><img src="img/weapons-machineGun.webp" alt="" loading="lazy"><span>Machine Gun</span></div><div class="item"><img src="img/weapons-bomber.webp" alt="" loading="lazy"><span>Bomber</span></div><div class="item"><img src="img/weapons-chain.webp" alt="" loading="lazy"><span>Railgun</span></div><div class="item"><img src="img/weapons-plasma.webp" alt="" loading="lazy"><span>Plasma</span></div><div class="item"><img src="img/weapons-iceSpike.webp" alt="" loading="lazy"><span>Mine</span></div><div class="item"><img src="img/weapons-hammer.webp" alt="" loading="lazy"><span>Hammer</span></div><div class="item"><img src="img/weapons-wind.webp" alt="" loading="lazy"><span>Freezer</span></div><div class="item"><img src="img/weapons-tesla.webp" alt="" loading="lazy"><span>Tesla</span></div><div class="item"><img src="img/weapons-ballista.webp" alt="" loading="lazy"><span>Ballista</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-slower.webp" alt="" loading="lazy"><span>Slower</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-fireball.webp" alt="" loading="lazy"><span>Fireball</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-sharp.webp" alt="" loading="lazy"><span>Poison Bolt</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-mortar.webp" alt="" loading="lazy"><span>Mortar</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-catapult.webp" alt="" loading="lazy"><span>Catapult</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-lightningRod.webp" alt="" loading="lazy"><span>Lightning Rod</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-prism.webp" alt="" loading="lazy"><span>Prism</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-plague.webp" alt="" loading="lazy"><span>Plague</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/creatures-colossus.webp" alt=""><span class="name">Creatures</span><span class="count">22</span><span class="peek"><img src="img/creatures-flyer.webp" alt="" loading="lazy"><img src="img/creatures-toxic.webp" alt="" loading="lazy"><img src="img/creatures-vine.webp" alt="" loading="lazy"><img src="img/creatures-tank.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/creatures-swarm.webp" alt="" loading="lazy"><span>Grub</span></div><div class="item"><img src="img/creatures-runner.webp" alt="" loading="lazy"><span>Jackal</span></div><div class="item"><img src="img/creatures-flyer.webp" alt="" loading="lazy"><span>Kite</span></div><div class="item"><img src="img/creatures-healer.webp" alt="" loading="lazy"><span>Shaman</span></div><div class="item"><img src="img/creatures-creeper.webp" alt="" loading="lazy"><span>Creeper</span></div><div class="item"><img src="img/creatures-hopper.webp" alt="" loading="lazy"><span>Flea</span></div><div class="item"><img src="img/creatures-splitter.webp" alt="" loading="lazy"><span>Mold</span></div><div class="item"><img src="img/creatures-teleporter.webp" alt="" loading="lazy"><span>Shade</span></div><div class="item"><img src="img/creatures-toxic.webp" alt="" loading="lazy"><span>Blackfly</span></div><div class="item"><img src="img/creatures-helmeted.webp" alt="" loading="lazy"><span>Bronzehead</span></div><div class="item"><img src="img/creatures-exploder.webp" alt="" loading="lazy"><span>Fuse</span></div><div class="item"><img src="img/creatures-shielded.webp" alt="" loading="lazy"><span>Shielded</span></div><div class="item"><img src="img/creatures-reflector.webp" alt="" loading="lazy"><span>Reflector</span></div><div class="item"><img src="img/creatures-vine.webp" alt="" loading="lazy"><span>Vine</span></div><div class="item"><img src="img/creatures-armoredFlyer.webp" alt="" loading="lazy"><span>Steelwing</span></div><div class="item"><img src="img/creatures-berserker.webp" alt="" loading="lazy"><span>Berserker</span></div><div class="item"><img src="img/creatures-iceGolem.webp" alt="" loading="lazy"><span>Ice Golem</span></div><div class="item"><img src="img/creatures-golemLord.webp" alt="" loading="lazy"><span>Golem Lord</span></div><div class="item"><img src="img/creatures-apocalypse.webp" alt="" loading="lazy"><span>Apocalypse Herald</span></div><div class="item"><img src="img/creatures-tank.webp" alt="" loading="lazy"><span>Vise</span></div><div class="item"><img src="img/creatures-queen.webp" alt="" loading="lazy"><span>Queen</span></div><div class="item"><img src="img/creatures-colossus.webp" alt="" loading="lazy"><span>Giant</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/ultimates-rebirth.webp" alt=""><span class="name">Ultimates</span><span class="count">11</span><span class="peek"><img src="img/ultimates-meteor.webp" alt="" loading="lazy"><img src="img/ultimates-blessing.webp" alt="" loading="lazy"><img src="img/ultimates-orbitalLaser.webp" alt="" loading="lazy"><img src="img/ultimates-apocalypseUlt.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/ultimates-lightningStorm.webp" alt="" loading="lazy"><span>Lightning Storm</span></div><div class="item"><img src="img/ultimates-meteor.webp" alt="" loading="lazy"><span>Meteor</span></div><div class="item"><img src="img/ultimates-freezeWave.webp" alt="" loading="lazy"><span>Freeze Wave</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-holyBlast.webp" alt="" loading="lazy"><span>Holy Blast</span></div><div class="item"><img src="img/ultimates-blessing.webp" alt="" loading="lazy"><span>Blessing</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-timeStop.webp" alt="" loading="lazy"><span>Time Stop</span></div><div class="item"><img src="img/ultimates-orbitalLaser.webp" alt="" loading="lazy"><span>Orbital Laser</span></div><div class="item"><img src="img/ultimates-blackHole.webp" alt="" loading="lazy"><span>Black Hole</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-deathDecree.webp" alt="" loading="lazy"><span>Death Decree</span></div><div class="item"><img src="img/ultimates-apocalypseUlt.webp" alt="" loading="lazy"><span>Apocalypse</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-rebirth.webp" alt="" loading="lazy"><span>Rebirth</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/castles-dragonRoost.webp" alt=""><span class="name">Castles</span><span class="count">12</span><span class="peek"><img src="img/castles-greenBanner.webp" alt="" loading="lazy"><img src="img/castles-twinBastion.webp" alt="" loading="lazy"><img src="img/castles-goldenCrown.webp" alt="" loading="lazy"><img src="img/castles-stormBastion.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/castles-stoneKeep.webp" alt="" loading="lazy"><span>Stone Keep</span></div><div class="item"><img src="img/castles-greenBanner.webp" alt="" loading="lazy"><span>Green Banner</span></div><div class="item premium"><em>Premium</em><img src="img/castles-blueSpire.webp" alt="" loading="lazy"><span>Old Keep</span></div><div class="item"><img src="img/castles-crimsonFlag.webp" alt="" loading="lazy"><span>Crimson Flag</span></div><div class="item premium"><em>Premium</em><img src="img/castles-twinBastion.webp" alt="" loading="lazy"><span>Lava Keep</span></div><div class="item"><img src="img/castles-ironGate.webp" alt="" loading="lazy"><span>Blue Bastion</span></div><div class="item premium"><em>Premium</em><img src="img/castles-shadowKeep.webp" alt="" loading="lazy"><span>Rune Keep</span></div><div class="item"><img src="img/castles-goldenCrown.webp" alt="" loading="lazy"><span>Royal Crown</span></div><div class="item premium"><em>Premium</em><img src="img/castles-glacierKeep.webp" alt="" loading="lazy"><span>Blood Keep</span></div><div class="item"><img src="img/castles-flameSpire.webp" alt="" loading="lazy"><span>Bone Keep</span></div><div class="item premium"><em>Premium</em><img src="img/castles-stormBastion.webp" alt="" loading="lazy"><span>Frost Keep</span></div><div class="item premium"><em>Premium</em><img src="img/castles-dragonRoost.webp" alt="" loading="lazy"><span>Golden Keep</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/platforms-royal.webp" alt=""><span class="name">Platforms</span><span class="count">14</span><span class="peek"><img src="img/platforms-military.webp" alt="" loading="lazy"><img src="img/platforms-energy.webp" alt="" loading="lazy"><img src="img/platforms-ice.webp" alt="" loading="lazy"><img src="img/platforms-toxic.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/platforms-wood.webp" alt="" loading="lazy"><span>Wood</span></div><div class="item"><img src="img/platforms-military.webp" alt="" loading="lazy"><span>Military</span></div><div class="item"><img src="img/platforms-steelBlue.webp" alt="" loading="lazy"><span>Blue Steel</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-stone.webp" alt="" loading="lazy"><span>Stone</span></div><div class="item"><img src="img/platforms-steelRed.webp" alt="" loading="lazy"><span>Red Steel</span></div><div class="item"><img src="img/platforms-energy.webp" alt="" loading="lazy"><span>Energy</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-rune.webp" alt="" loading="lazy"><span>Rune</span></div><div class="item"><img src="img/platforms-hazard.webp" alt="" loading="lazy"><span>Hazard</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-ice.webp" alt="" loading="lazy"><span>Ice</span></div><div class="item"><img src="img/platforms-gold.webp" alt="" loading="lazy"><span>Gold</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-bone.webp" alt="" loading="lazy"><span>Bone</span></div><div class="item"><img src="img/platforms-volcanic.webp" alt="" loading="lazy"><span>Volcanic</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-toxic.webp" alt="" loading="lazy"><span>Toxic</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-royal.webp" alt="" loading="lazy"><span>Royal</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/artifacts-crownHelm.webp" alt=""><span class="name">Artifacts</span><span class="count">14</span><span class="peek"><img src="img/artifacts-mistHorn.webp" alt="" loading="lazy"><img src="img/artifacts-paleChalice.webp" alt="" loading="lazy"><img src="img/artifacts-fateArrow.webp" alt="" loading="lazy"><img src="img/artifacts-ancientShield.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/artifacts-sparkSeal.webp" alt="" loading="lazy"><span>Spark Seal</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-mistHorn.webp" alt="" loading="lazy"><span>Mist Horn</span></div><div class="item"><img src="img/artifacts-tarRing.webp" alt="" loading="lazy"><span>Tar Ring</span></div><div class="item"><img src="img/artifacts-plagueVial.webp" alt="" loading="lazy"><span>Plague Vial</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-webCharm.webp" alt="" loading="lazy"><span>Web Charm</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-paleChalice.webp" alt="" loading="lazy"><span>Pale Chalice</span></div><div class="item"><img src="img/artifacts-notchedAxe.webp" alt="" loading="lazy"><span>Notched Axe</span></div><div class="item"><img src="img/artifacts-emberGlove.webp" alt="" loading="lazy"><span>Ember Glove</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-fateArrow.webp" alt="" loading="lazy"><span>Fate Arrow</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-emberDagger.webp" alt="" loading="lazy"><span>Ember Dagger</span></div><div class="item"><img src="img/artifacts-bronzeMask.webp" alt="" loading="lazy"><span>Bronze Mask</span></div><div class="item"><img src="img/artifacts-rampartStone.webp" alt="" loading="lazy"><span>Rampart Stone</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-ancientShield.webp" alt="" loading="lazy"><span>Ancient Shield</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-crownHelm.webp" alt="" loading="lazy"><span>Crown Helm</span></div></div></details>
 </div>
-<h2>Legal · Yasal</h2>
-<p class="links">
-<a href="privacy.html">Privacy Policy</a><a href="gizlilik.html">Gizlilik Politikası</a><br>
-<a href="terms.html">Terms of Use</a><a href="sartlar.html">Kullanım Şartları</a><br>
-<a href="delete-account.html">Delete account</a><a href="hesap-silme.html">Hesap silme</a>
-</p>
-<footer>© DoDiMi · <a href="mailto:dodimisoft@gmail.com">dodimisoft@gmail.com</a></footer>
-</div>
+</section>
+</main>
+<footer><div class="wrap">
+<div class="links"><a href="../castlego/privacy.html">Privacy Policy</a><a href="../castlego/terms.html">Terms of Use</a><a href="../castlego/delete-account.html">Delete account</a><a href="mailto:dodimisoft@gmail.com">Contact: dodimisoft@gmail.com</a></div>
+<div class="copy">© 2026 DoDiMi</div>
+</div></footer>
+<script>
+(function(){var k='dodimi.lang';var s=null;try{s=localStorage.getItem(k)}catch(e){}
+document.querySelectorAll('.lang a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem(k,a.dataset.l)}catch(e){}})});
+if(!s&&'en'==='en'&&/^tr\b/i.test(navigator.language||'')){location.replace('../castlego/tr.html')}})();
+</script>
 </body>
 </html>

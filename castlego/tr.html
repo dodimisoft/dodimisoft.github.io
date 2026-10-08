@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Castle Go — 500 bölümlük kule savunmasında kaleni savun.</title>
+<meta name="description" content="Sahaya silah kur, savaşın ortasında yükselt, canavar ve boss dalgalarına karşı hattı tut. Her bölüm sıfırdan başlar; topladıkların seni güçlendirir.">
+<meta property="og:title" content="Castle Go — 500 bölümlük kule savunmasında kaleni savun.">
+<meta property="og:description" content="Sahaya silah kur, savaşın ortasında yükselt, canavar ve boss dalgalarına karşı hattı tut. Her bölüm sıfırdan başlar; topladıkların seni güçlendirir.">
+<meta property="og:image" content="https://dodimisoft.github.io/castlego/img/logo.webp">
+<meta name="theme-color" content="#0a1017">
+<link rel="icon" href="../castlego/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1017;--bg2:#0f1a26;--surface:#152131;--surfaceHi:#1c2c40;--border:#233448;--borderHi:#31597a;--accent:#4fd1e0;--gold:#f5c451;--text:#f4f9fc;--dim:#afc8de}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 Fredoka,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 520px at 50% -120px,rgba(79,209,224,.22),transparent 70%),radial-gradient(700px 500px at 100% 40%,rgba(49,89,122,.25),transparent 70%),linear-gradient(var(--bg),var(--bg2))}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.display{font-family:"Luckiest Guy",Fredoka,sans-serif;font-weight:400;letter-spacing:.04em;text-transform:uppercase}
+/* üst çubuk */
+.top{position:sticky;top:0;z-index:10;background:rgba(10,16,23,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text)}
+.brand:hover{text-decoration:none}
+.brand img{width:40px;height:40px;object-fit:contain}
+.brand span{font-size:22px;padding-top:4px}
+.menu{display:flex;gap:18px;margin-left:auto;font-weight:500}
+.menu a{color:var(--dim)}
+.menu a.on,.menu a:hover{color:var(--text);text-decoration:none}
+.lang{display:flex;border:1px solid var(--borderHi);border-radius:999px;overflow:hidden;margin-left:8px}
+.lang a{padding:6px 12px;font-weight:600;font-size:14px;color:var(--dim)}
+.lang a.on{background:var(--accent);color:#06232a}
+.lang a:hover{text-decoration:none}
+@media (max-width:640px){.menu{display:none}.lang{margin-left:auto}.brand span{font-size:19px}}
+/* kahraman */
+.hero{text-align:center;padding:56px 0 32px}
+.hero .logo{width:min(300px,70vw);height:auto;filter:drop-shadow(0 18px 40px rgba(79,209,224,.28))}
+.wordmark{display:block;width:min(520px,88vw);height:auto;margin:6px auto 0}
+.tagline{font-size:22px;font-weight:600;margin:14px 0 6px}
+.lead{max-width:640px;margin:0 auto;color:var(--dim)}
+.badges{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:26px 0 8px}
+.badge{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:14px;background:var(--surface);border:1px solid var(--borderHi);text-align:left}
+.badge small{display:block;font-size:12px;color:var(--dim);line-height:1.2}
+.badge b{font-size:17px;line-height:1.2}
+.note{font-size:14px;color:var(--dim)}
+/* sayılar */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:36px 0 8px}
+.stats div{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 8px;text-align:center}
+.stats b{display:block;font-family:"Luckiest Guy";font-weight:400;font-size:30px;color:var(--accent);line-height:1.1}
+.stats span{font-size:14px;color:var(--dim)}
+@media (max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
+section{padding:40px 0}
+h2.sec{font-size:30px;margin:0 0 6px;text-align:center}
+.sub{text-align:center;color:var(--dim);margin:0 0 26px}
+/* özellikler */
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feature{background:linear-gradient(180deg,var(--surfaceHi),var(--surface));border:1px solid var(--border);border-radius:18px;padding:20px;text-align:center}
+.feature img{width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.45))}
+.feature h3{font-size:18px;margin:10px 0 6px}
+.feature p{margin:0;color:var(--dim);font-size:15px}
+@media (max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.features{grid-template-columns:1fr}}
+/* koleksiyon menüsü */
+.cats{display:flex;flex-direction:column;gap:12px}
+details.cat{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+details.cat[open]{border-color:var(--borderHi)}
+details.cat summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px}
+details.cat summary::-webkit-details-marker{display:none}
+details.cat summary:hover{background:var(--surfaceHi)}
+.cat .ico{width:52px;height:52px;object-fit:contain;flex:none}
+.cat .name{font-size:20px;font-weight:600}
+.cat .count{font-size:13px;font-weight:600;color:var(--accent);border:1px solid var(--borderHi);border-radius:999px;padding:2px 10px;margin-left:6px}
+.cat .peek{display:flex;margin-left:auto}
+.cat .peek img{width:34px;height:34px;object-fit:contain;margin-left:-6px;background:var(--bg);border:1px solid var(--border);border-radius:50%;padding:3px}
+.cat .chev{width:26px;height:26px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--accent);font-weight:700;transition:transform .2s}
+details.cat[open] .chev{transform:rotate(90deg)}
+@media (max-width:560px){.cat .peek{display:none}.cat .chev{margin-left:auto}}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px;padding:6px 18px 18px}
+.item{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:10px 8px 8px;text-align:center}
+.item img{width:84px;height:84px;object-fit:contain}
+.item span{display:block;font-size:14px;line-height:1.25;margin-top:6px}
+.item.premium{border-color:rgba(245,196,81,.45)}
+.item em{position:absolute;top:6px;right:6px;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#2b1d00;background:var(--gold);border-radius:6px;padding:1px 5px}
+/* hukuk */
+.doc{max-width:760px;margin:40px auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px clamp(18px,4vw,40px)}
+.doc h1{font-size:34px;margin:0 0 4px}
+.doc .date{display:inline-block;font-size:13px;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:2px 12px;margin-bottom:18px}
+.doc h2{font-size:17px;letter-spacing:.02em;margin:28px 0 8px;color:var(--accent)}
+.doc p{color:var(--dim);margin:0 0 12px;overflow-wrap:anywhere}
+.doc b{color:var(--text)}
+/* alt bilgi */
+footer{border-top:1px solid var(--border);margin-top:48px;padding:28px 0 40px;color:var(--dim);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+footer .links{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer .links a{color:var(--dim)}
+footer .copy{margin-left:auto}
+.studio{display:flex;gap:18px;align-items:center;max-width:560px;margin:24px auto;padding:18px;background:var(--surface);border:1px solid var(--borderHi);border-radius:20px;color:var(--text)}
+.studio:hover{text-decoration:none;background:var(--surfaceHi)}
+.studio img{width:92px;height:92px;object-fit:contain}
+.studio b{font-size:22px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../castlego/tr.html"><img src="../castlego/img/logo.webp" alt=""><span class="display">Castle Go</span></a>
+<nav class="menu">
+<a href="../castlego/tr.html" class="on">Oyun</a>
+<a href="../castlego/gizlilik.html">Gizlilik</a>
+<a href="../castlego/sartlar.html">Şartlar</a>
+</nav>
+<div class="lang"><a data-l="tr" href="#" class="on">TR</a><a data-l="en" href="../castlego/index.html">EN</a></div>
+</div></header>
+
+<main class="wrap">
+<div class="hero">
+<img class="logo" src="img/logo.webp" alt="Castle Go">
+<svg class="wordmark" viewBox="0 0 560 96" role="img" aria-label="Castle Go">
+<defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f9fc"/><stop offset="1" stop-color="#a5e9f4"/></linearGradient></defs>
+<text x="280" y="78" text-anchor="middle" font-family="Luckiest Guy" font-size="80" letter-spacing="4" fill="#06141c" opacity=".55" transform="translate(0 5)">CASTLE GO</text>
+<text x="280" y="78" text-anchor="middle" font-family="Luckiest Guy" font-size="80" letter-spacing="4" fill="url(#wg)" stroke="#23648b" stroke-width="10" paint-order="stroke" stroke-linejoin="round">CASTLE GO</text>
+</svg>
+<p class="tagline">500 bölümlük kule savunmasında kaleni savun.</p>
+<p class="lead">Sahaya silah kur, savaşın ortasında yükselt, canavar ve boss dalgalarına karşı hattı tut. Her bölüm sıfırdan başlar; topladıkların seni güçlendirir.</p>
+<div class="badges"><div class="badge"><svg width="24" height="26" viewBox="0 0 24 26" aria-hidden="true"><path d="M2 1.5v23L14.5 13z" fill="#4fd1e0"/><path d="M2 1.5l15.6 8.9-3.1 2.6z" fill="#a5e9f4"/><path d="M2 24.5l15.6-8.9-3.1-2.6z" fill="#31a3b3"/><path d="M17.6 10.4l4.2 2.4c.6.3.6.9 0 1.2l-4.2 2.4-3.1-3.4z" fill="#f5c451"/></svg><div><small>Yakında</small><b>Google Play</b></div></div><div class="badge"><svg width="22" height="26" viewBox="0 0 22 26" aria-hidden="true"><path fill="#f4f9fc" d="M18.2 13.8c0-3.3 2.7-4.9 2.8-5-1.5-2.2-3.9-2.5-4.7-2.6-2-.2-3.9 1.2-4.9 1.2-1 0-2.6-1.2-4.3-1.1-2.2 0-4.2 1.3-5.3 3.2-2.3 4-.6 9.8 1.6 13 1.1 1.6 2.4 3.3 4.1 3.3 1.6-.1 2.3-1.1 4.3-1.1 2 0 2.5 1.1 4.3 1 1.8 0 2.9-1.6 4-3.2 1.2-1.8 1.8-3.6 1.8-3.7-.1 0-3.7-1.4-3.7-5.8zM15 4.1c.9-1.1 1.5-2.6 1.3-4.1-1.3.1-2.9.9-3.8 2-.8.9-1.6 2.5-1.4 4 1.5.1 2.9-.8 3.9-1.9z"/></svg><div><small>Yakında</small><b>App Store</b></div></div></div>
+<p class="note">İnternet bağlantısı gerektirir.</p>
+<div class="stats"><div><b>500</b><span>Bölüm</span></div><div><b>18</b><span>Silah</span></div><div><b>22</b><span>Canavar</span></div><div><b>6</b><span>Boss</span></div><div><b>11</b><span>Özel güç</span></div><div><b>25</b><span>Madalya serisi</span></div></div>
+</div>
+<section>
+<h2 class="sec display" style="margin-bottom:24px">Nasıl oynanır</h2>
+<div class="features"><div class="feature"><img src="img/weapons-catapult.webp" alt="" loading="lazy"><h3>Kur ve yükselt</h3><p>Sahaya silah kur, savaş sürerken yükselt. Her birinin kendi görevi olan 18 silah.</p></div><div class="feature"><img src="img/creatures-colossus.webp" alt="" loading="lazy"><h3>Canavarlar ve bosslar</h3><p>Kendi yetenekleri olan 22 canavar türü ve bölgeleri koruyan 6 boss.</p></div><div class="feature"><img src="img/ultimates-meteor.webp" alt="" loading="lazy"><h3>Özel güçler</h3><p>Savaştıkça dolan 11 özel güçle savaşın gidişatını çevir.</p></div><div class="feature"><img src="img/castles-dragonRoost.webp" alt="" loading="lazy"><h3>Topla ve güçlen</h3><p>Savunmanı güçlendiren 12 kale, 14 kaide ve 14 artefakt.</p></div></div>
+</section>
+<section>
+<h2 class="sec display">Castle Go dünyası</h2>
+<p class="sub">Açabileceğin her şeyi görmek için bir kategoriye dokun.</p>
+<div class="cats">
+<details class="cat"><summary><img class="ico" src="img/weapons-plague.webp" alt=""><span class="name">Silahlar</span><span class="count">18</span><span class="peek"><img src="img/weapons-bomber.webp" alt="" loading="lazy"><img src="img/weapons-hammer.webp" alt="" loading="lazy"><img src="img/weapons-fireball.webp" alt="" loading="lazy"><img src="img/weapons-lightningRod.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/weapons-gun.webp" alt="" loading="lazy"><span>Nişancı</span></div><div class="item"><img src="img/weapons-machineGun.webp" alt="" loading="lazy"><span>Makineli</span></div><div class="item"><img src="img/weapons-bomber.webp" alt="" loading="lazy"><span>Bombacı</span></div><div class="item"><img src="img/weapons-chain.webp" alt="" loading="lazy"><span>Ray Silahı</span></div><div class="item"><img src="img/weapons-plasma.webp" alt="" loading="lazy"><span>Plazma</span></div><div class="item"><img src="img/weapons-iceSpike.webp" alt="" loading="lazy"><span>Mayın</span></div><div class="item"><img src="img/weapons-hammer.webp" alt="" loading="lazy"><span>Çekiç</span></div><div class="item"><img src="img/weapons-wind.webp" alt="" loading="lazy"><span>Dondurucu</span></div><div class="item"><img src="img/weapons-tesla.webp" alt="" loading="lazy"><span>Tesla</span></div><div class="item"><img src="img/weapons-ballista.webp" alt="" loading="lazy"><span>Balista</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-slower.webp" alt="" loading="lazy"><span>Yavaşlatıcı</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-fireball.webp" alt="" loading="lazy"><span>Alev Topu</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-sharp.webp" alt="" loading="lazy"><span>Zehir Oku</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-mortar.webp" alt="" loading="lazy"><span>Havan</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-catapult.webp" alt="" loading="lazy"><span>Mancınık</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-lightningRod.webp" alt="" loading="lazy"><span>Şimşek Direği</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-prism.webp" alt="" loading="lazy"><span>Prizma</span></div><div class="item premium"><em>Premium</em><img src="img/weapons-plague.webp" alt="" loading="lazy"><span>Veba</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/creatures-colossus.webp" alt=""><span class="name">Canavarlar</span><span class="count">22</span><span class="peek"><img src="img/creatures-flyer.webp" alt="" loading="lazy"><img src="img/creatures-toxic.webp" alt="" loading="lazy"><img src="img/creatures-vine.webp" alt="" loading="lazy"><img src="img/creatures-tank.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/creatures-swarm.webp" alt="" loading="lazy"><span>Kurtçuk</span></div><div class="item"><img src="img/creatures-runner.webp" alt="" loading="lazy"><span>Çakal</span></div><div class="item"><img src="img/creatures-flyer.webp" alt="" loading="lazy"><span>Çaylak</span></div><div class="item"><img src="img/creatures-healer.webp" alt="" loading="lazy"><span>Şaman</span></div><div class="item"><img src="img/creatures-creeper.webp" alt="" loading="lazy"><span>Sürüngen</span></div><div class="item"><img src="img/creatures-hopper.webp" alt="" loading="lazy"><span>Pire</span></div><div class="item"><img src="img/creatures-splitter.webp" alt="" loading="lazy"><span>Küf</span></div><div class="item"><img src="img/creatures-teleporter.webp" alt="" loading="lazy"><span>Gölge</span></div><div class="item"><img src="img/creatures-toxic.webp" alt="" loading="lazy"><span>Kara Sinek</span></div><div class="item"><img src="img/creatures-helmeted.webp" alt="" loading="lazy"><span>Tunç Kafa</span></div><div class="item"><img src="img/creatures-exploder.webp" alt="" loading="lazy"><span>Fitil</span></div><div class="item"><img src="img/creatures-shielded.webp" alt="" loading="lazy"><span>Kalkanlı</span></div><div class="item"><img src="img/creatures-reflector.webp" alt="" loading="lazy"><span>Yansıtıcı</span></div><div class="item"><img src="img/creatures-vine.webp" alt="" loading="lazy"><span>Sarmaşık</span></div><div class="item"><img src="img/creatures-armoredFlyer.webp" alt="" loading="lazy"><span>Çelik Kanat</span></div><div class="item"><img src="img/creatures-berserker.webp" alt="" loading="lazy"><span>Berserk</span></div><div class="item"><img src="img/creatures-iceGolem.webp" alt="" loading="lazy"><span>Buz Golemi</span></div><div class="item"><img src="img/creatures-golemLord.webp" alt="" loading="lazy"><span>Golem Lordu</span></div><div class="item"><img src="img/creatures-apocalypse.webp" alt="" loading="lazy"><span>Kıyamet Elçisi</span></div><div class="item"><img src="img/creatures-tank.webp" alt="" loading="lazy"><span>Mengene</span></div><div class="item"><img src="img/creatures-queen.webp" alt="" loading="lazy"><span>Kraliçe</span></div><div class="item"><img src="img/creatures-colossus.webp" alt="" loading="lazy"><span>Dev</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/ultimates-rebirth.webp" alt=""><span class="name">Özel Güçler</span><span class="count">11</span><span class="peek"><img src="img/ultimates-meteor.webp" alt="" loading="lazy"><img src="img/ultimates-blessing.webp" alt="" loading="lazy"><img src="img/ultimates-orbitalLaser.webp" alt="" loading="lazy"><img src="img/ultimates-apocalypseUlt.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/ultimates-lightningStorm.webp" alt="" loading="lazy"><span>Yıldırım Fırtınası</span></div><div class="item"><img src="img/ultimates-meteor.webp" alt="" loading="lazy"><span>Meteor</span></div><div class="item"><img src="img/ultimates-freezeWave.webp" alt="" loading="lazy"><span>Donma Dalgası</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-holyBlast.webp" alt="" loading="lazy"><span>Kutsal Patlama</span></div><div class="item"><img src="img/ultimates-blessing.webp" alt="" loading="lazy"><span>Bereket</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-timeStop.webp" alt="" loading="lazy"><span>Zaman Durdurma</span></div><div class="item"><img src="img/ultimates-orbitalLaser.webp" alt="" loading="lazy"><span>Orbital Lazer</span></div><div class="item"><img src="img/ultimates-blackHole.webp" alt="" loading="lazy"><span>Kara Delik</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-deathDecree.webp" alt="" loading="lazy"><span>Ölüm Fermanı</span></div><div class="item"><img src="img/ultimates-apocalypseUlt.webp" alt="" loading="lazy"><span>Kıyamet</span></div><div class="item premium"><em>Premium</em><img src="img/ultimates-rebirth.webp" alt="" loading="lazy"><span>Yeniden Doğuş</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/castles-dragonRoost.webp" alt=""><span class="name">Kaleler</span><span class="count">12</span><span class="peek"><img src="img/castles-greenBanner.webp" alt="" loading="lazy"><img src="img/castles-twinBastion.webp" alt="" loading="lazy"><img src="img/castles-goldenCrown.webp" alt="" loading="lazy"><img src="img/castles-stormBastion.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/castles-stoneKeep.webp" alt="" loading="lazy"><span>Taş Kale</span></div><div class="item"><img src="img/castles-greenBanner.webp" alt="" loading="lazy"><span>Yeşil Sancak</span></div><div class="item premium"><em>Premium</em><img src="img/castles-blueSpire.webp" alt="" loading="lazy"><span>Eski Kale</span></div><div class="item"><img src="img/castles-crimsonFlag.webp" alt="" loading="lazy"><span>Kızıl Bayrak</span></div><div class="item premium"><em>Premium</em><img src="img/castles-twinBastion.webp" alt="" loading="lazy"><span>Lav Kalesi</span></div><div class="item"><img src="img/castles-ironGate.webp" alt="" loading="lazy"><span>Mavi Burç</span></div><div class="item premium"><em>Premium</em><img src="img/castles-shadowKeep.webp" alt="" loading="lazy"><span>Rün Kalesi</span></div><div class="item"><img src="img/castles-goldenCrown.webp" alt="" loading="lazy"><span>Kraliyet Tacı</span></div><div class="item premium"><em>Premium</em><img src="img/castles-glacierKeep.webp" alt="" loading="lazy"><span>Kan Kalesi</span></div><div class="item"><img src="img/castles-flameSpire.webp" alt="" loading="lazy"><span>Kemik Kalesi</span></div><div class="item premium"><em>Premium</em><img src="img/castles-stormBastion.webp" alt="" loading="lazy"><span>Buz Kalesi</span></div><div class="item premium"><em>Premium</em><img src="img/castles-dragonRoost.webp" alt="" loading="lazy"><span>Altın Kale</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/platforms-royal.webp" alt=""><span class="name">Kaideler</span><span class="count">14</span><span class="peek"><img src="img/platforms-military.webp" alt="" loading="lazy"><img src="img/platforms-energy.webp" alt="" loading="lazy"><img src="img/platforms-ice.webp" alt="" loading="lazy"><img src="img/platforms-toxic.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/platforms-wood.webp" alt="" loading="lazy"><span>Ahşap</span></div><div class="item"><img src="img/platforms-military.webp" alt="" loading="lazy"><span>Askeri</span></div><div class="item"><img src="img/platforms-steelBlue.webp" alt="" loading="lazy"><span>Mavi Çelik</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-stone.webp" alt="" loading="lazy"><span>Taş</span></div><div class="item"><img src="img/platforms-steelRed.webp" alt="" loading="lazy"><span>Kızıl Çelik</span></div><div class="item"><img src="img/platforms-energy.webp" alt="" loading="lazy"><span>Enerji</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-rune.webp" alt="" loading="lazy"><span>Rün</span></div><div class="item"><img src="img/platforms-hazard.webp" alt="" loading="lazy"><span>Tehlike</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-ice.webp" alt="" loading="lazy"><span>Buz</span></div><div class="item"><img src="img/platforms-gold.webp" alt="" loading="lazy"><span>Altın</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-bone.webp" alt="" loading="lazy"><span>Kemik</span></div><div class="item"><img src="img/platforms-volcanic.webp" alt="" loading="lazy"><span>Volkanik</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-toxic.webp" alt="" loading="lazy"><span>Zehir</span></div><div class="item premium"><em>Premium</em><img src="img/platforms-royal.webp" alt="" loading="lazy"><span>Kraliyet</span></div></div></details>
+<details class="cat"><summary><img class="ico" src="img/artifacts-crownHelm.webp" alt=""><span class="name">Artefaktlar</span><span class="count">14</span><span class="peek"><img src="img/artifacts-mistHorn.webp" alt="" loading="lazy"><img src="img/artifacts-paleChalice.webp" alt="" loading="lazy"><img src="img/artifacts-fateArrow.webp" alt="" loading="lazy"><img src="img/artifacts-ancientShield.webp" alt="" loading="lazy"></span><span class="chev">›</span></summary><div class="items"><div class="item"><img src="img/artifacts-sparkSeal.webp" alt="" loading="lazy"><span>Kıvılcım Mührü</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-mistHorn.webp" alt="" loading="lazy"><span>Sisli Boynuz</span></div><div class="item"><img src="img/artifacts-tarRing.webp" alt="" loading="lazy"><span>Zift Halkası</span></div><div class="item"><img src="img/artifacts-plagueVial.webp" alt="" loading="lazy"><span>Vebalı Şişe</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-webCharm.webp" alt="" loading="lazy"><span>Ağ Tılsımı</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-paleChalice.webp" alt="" loading="lazy"><span>Solgun Kadeh</span></div><div class="item"><img src="img/artifacts-notchedAxe.webp" alt="" loading="lazy"><span>Çentikli Balta</span></div><div class="item"><img src="img/artifacts-emberGlove.webp" alt="" loading="lazy"><span>Kor Eldiven</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-fateArrow.webp" alt="" loading="lazy"><span>Kader Oku</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-emberDagger.webp" alt="" loading="lazy"><span>Kor Hançer</span></div><div class="item"><img src="img/artifacts-bronzeMask.webp" alt="" loading="lazy"><span>Tunç Maske</span></div><div class="item"><img src="img/artifacts-rampartStone.webp" alt="" loading="lazy"><span>Sur Taşı</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-ancientShield.webp" alt="" loading="lazy"><span>Kadim Kalkan</span></div><div class="item premium"><em>Premium</em><img src="img/artifacts-crownHelm.webp" alt="" loading="lazy"><span>Taç Miğfer</span></div></div></details>
+</div>
+</section>
+</main>
+<footer><div class="wrap">
+<div class="links"><a href="../castlego/gizlilik.html">Gizlilik Politikası</a><a href="../castlego/sartlar.html">Kullanım Şartları</a><a href="../castlego/hesap-silme.html">Hesap silme</a><a href="mailto:dodimisoft@gmail.com">İletişim: dodimisoft@gmail.com</a></div>
+<div class="copy">© 2026 DoDiMi</div>
+</div></footer>
+<script>
+(function(){var k='dodimi.lang';var s=null;try{s=localStorage.getItem(k)}catch(e){}
+document.querySelectorAll('.lang a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem(k,a.dataset.l)}catch(e){}})});
+if(!s&&'tr'==='en'&&/^tr\b/i.test(navigator.language||'')){location.replace('../castlego/index.html')}})();
+</script>
+</body>
+</html>
