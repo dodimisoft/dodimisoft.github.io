@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Castle Go — tower defense</title>
+<link rel="icon" href="img/icon.webp">
+<style>
+:root{--bg:#0a1017;--surface:#152131;--border:#233448;--accent:#4fd1e0;--text:#f4f9fc;--dim:#afc8de}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+header img{width:44px;height:44px;border-radius:10px}
+header .t{font-weight:700;font-size:20px}
+header nav{margin-left:auto;font-size:14px}
+h1{font-size:28px;line-height:1.25;margin:8px 0 16px}
+h2{font-size:18px;margin:28px 0 8px;color:var(--accent)}
+p{margin:0 0 12px;color:var(--dim)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin:20px 0}
+.grid img{width:100%;aspect-ratio:1;object-fit:contain;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.stats div{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px}
+.stats b{display:block;font-size:22px;color:var(--text)}
+.stats span{font-size:13px;color:var(--dim)}
+.links a{display:inline-block;margin:0 14px 8px 0}
+footer{margin-top:40px;font-size:13px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><img src="img/icon.webp" alt=""><a class="t" href="./" style="color:inherit;text-decoration:none">Castle Go</a></header>
+
+<h1>Castle Go</h1>
+<p>Defend your castle across 500 levels. Build weapons on the field, upgrade them during battle, and survive waves of creatures and bosses.</p>
+<p lang="tr">500 bölüm boyunca kaleni savun. Sahaya silah kur, savaşta yükselt, canavar ve boss dalgalarına dayan.</p>
+<div class="grid"><img src="img/castle.webp" alt="" loading="lazy"><img src="img/castle2.webp" alt="" loading="lazy"><img src="img/catapult.webp" alt="" loading="lazy"><img src="img/tesla.webp" alt="" loading="lazy"><img src="img/plasma.webp" alt="" loading="lazy"><img src="img/iceSpike.webp" alt="" loading="lazy"><img src="img/lifedrainer.webp" alt="" loading="lazy"><img src="img/frostTroll.webp" alt="" loading="lazy"><img src="img/meteor.webp" alt="" loading="lazy"><img src="img/blackHole.webp" alt="" loading="lazy"><img src="img/platform.webp" alt="" loading="lazy"><img src="img/colossus.webp" alt="" loading="lazy"></div>
+<div class="stats">
+<div><b>500</b><span>levels · bölüm</span></div>
+<div><b>18</b><span>weapons · silah</span></div>
+<div><b>22</b><span>creatures · canavar</span></div>
+<div><b>6</b><span>bosses · boss</span></div>
+<div><b>12</b><span>castles · kale</span></div>
+<div><b>14</b><span>platforms · kaide</span></div>
+<div><b>14</b><span>artifacts</span></div>
+<div><b>11</b><span>ultimates · özel güç</span></div>
+<div><b>25</b><span>medals · madalya</span></div>
+</div>
+<div class="card">
+<p><b>Coming soon</b> to Google Play and the App Store. · <span lang="tr">Yakında Google Play ve App Store'da.</span></p>
+<p>An internet connection is required. · <span lang="tr">İnternet bağlantısı gerektirir.</span></p>
+</div>
+<h2>Legal · Yasal</h2>
+<p class="links">
+<a href="privacy.html">Privacy Policy</a><a href="gizlilik.html">Gizlilik Politikası</a><br>
+<a href="terms.html">Terms of Use</a><a href="sartlar.html">Kullanım Şartları</a><br>
+<a href="delete-account.html">Delete account</a><a href="hesap-silme.html">Hesap silme</a>
+</p>
+<footer>© DoDiMi · <a href="mailto:dodimisoft@gmail.com">dodimisoft@gmail.com</a></footer>
+</div>
+</body>
+</html>
